@@ -1,0 +1,192 @@
+
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    /*aca le doy parametros al body lo vuelvo flex y le digo que su contenido tiene que estar en el centro y le doy un padding que seria el espacio entre el contenido y su borde*/
+}
+.centrado{
+    text-align:center;
+    background-color:rgba(0,170,255,0.2);
+/*esto lo uso para agregarle css a la bd diciendo que todo se centre y dandole un color celeste medio invisible con el rgba*/
+}
+
+nav{
+    width:100%;
+    text-align:center;
+}
+nav a{
+    display:inline-block;
+    text-decoration:none;
+    text-align:center; 
+    background:red;
+    width:40%; 
+    border-bottom: 4px solid black;
+    color:white;
+    /*aca le doy estilo al menu y a la etiqueta a,le pongo none en text-decoration para que no se vea la linea de abajo, le doy un color rojo y con el width digo cuanto tiene que ocupar lo de adentro
+    y le doy un border-bottom para que se vea un poco de negro la parte de abajo, le pongo las letras en blanco y en el display le pongo esa etiqueta para que aparezca uno alado del otro*/
+}
+nav a:hover{
+    text-align:center; 
+    background:pink;
+    border-bottom: 4px solid white;
+    color:black;
+    /*esto es lo que va a pasar cuando el mouse pase por encima del menu se vuelve rosa, le doy un borde blanco abajo y las letras se ponen negras*/
+}
+
+img{
+    max-width: 100%;
+}
+
+.container-all{
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    /*aca le pongo que tenga un max-width para que sea responsive y un width que ocupe todo y un border-radius para que se redondee los bordes, el overflow hidden es para que me recorte
+    las imagenes y si una es muy grande no se sobrepase*/
+}
+.slide{
+    display: flex;
+    transform: translate3d(0, 0, 0);
+    transition: all 600ms;
+    animation-name: autoplay;
+    animation-duration: 6.5s;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    /*aca le pongo un display flex para que se acomode y le doy un tranform: translate3d que lo pongo en 0 por que todavia no quiero que haga nada, la transition all le pongo 600ms
+    que eso va a todas las etiquetas de transition,animation name le pongo como se va a llamar la animacion y con el animation-direction pongo que sea alternate para asi va cambiando
+    de imagen en imagen de adelante para atras y viceversa, con el animation-fill-node lo que hago es que la animacion empiece en el principio y con el animation-iteration-count
+    hago que la animacion sea infinita*/
+}
+
+.item-slide{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-width: 100%;
+    /*aca pongo un flex-direction column para que las imagenes se pongan en posicion de columna y con el flex-shrink y flex-grow le pongo 0 para que ocupe toda la pantalla tanto 
+    horizontalmente como verticalmente y con el max-width acomodo las imagenes para que ya quede bien en la pantalla*/
+}
+
+.pagination{
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /*lo que hago aca es modificar las imagenes chiquitas para que se acomoden en su tamaño en la parte de abajo del slider las centro*/
+}
+
+.pagination-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid white;
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.5);
+    margin: 0 10px;
+    text-align: center;
+    transition: all 300ms;
+    /*aca lo que hago es hacer que las imagenes ya se muestren en el slider y con el cursor:pointer es para cambiar de como quiero que se vea el cursor al pasar sobre la imagen
+    le doy un margin de 0 de manera vertical y horizontal de 10 px para que se separen un poco */
+}
+
+.pagination-item:hover{
+    transform: scale(2);
+    /*aca lo que hago es que cuando el mouse pase por encima de las imagenes se agranden un poco*/
+}
+
+.pagination-item img{
+    display: inline-block;
+    max-width: none;
+    height: 100%;
+    transform: scale(1);
+    opacity: 0;
+    transition: all 300ms;
+    /*aca lo que hago es ajustar mas las imagenes y la opacidad 0 para que no se vean*/
+}
+
+.pagination-item:hover img{
+    opacity: 1;
+    transform: scale(1);
+/*lo que hago aca es que cuando el mouse pase por los cuadritos de abajo se muestre la imagen y se agrande*/
+}
+
+
+input[id="1"]:checked ~ .slide{
+    animation: none;
+    transform: translate3d(0, 0, 0);
+}
+
+input[id="1"]:checked ~ .pagination .pagination-item[for="1"]{
+    background: #fff;
+}
+
+input[id="2"]:checked ~ .slide{
+    animation: none;
+    transform: translate3d(calc(-100% * 1), 0, 0);
+}
+
+input[id="2"]:checked ~ .pagination .pagination-item[for="2"]{
+    background: #fff;
+}
+
+
+input[id="3"]:checked ~ .slide{
+    animation: none;
+    transform: translate3d(calc(-100% * 2), 0, 0);
+}
+
+input[id="3"]:checked ~ .pagination .pagination-item[for="3"]{
+    background: #fff;
+}
+/*lo que hago aca arriba es parar la animacion y con el backgroung ponerle el cuadradito en blanco de la imagen que toco el usuario, y con el id digo a cual le quiero dar
+esas etiquetas al poner id 1 se lo doy a la primera y el for=1 es para darselo al primer cuadradito ya en el id 2 y 3 puse el translate con un calculo para que haga una pequeña
+transicion y no se sienta tan vacio al cambiar de imagen*/
+
+@keyframes autoplay{
+    33%{
+        transform: translate3d(calc(-100% * 0), 0, 0);
+    }
+    
+    66%{
+        transform: translate3d(calc(-100% * 1), 0, 0);
+    }
+    
+    100%{
+        transform: translate3d(calc(-100% * 2), 0, 0);
+    }
+    /*lo que hago aca es ponerle keyframes a la etiqueta de animacion autoplay y lo que hace esto es pasar la animacion automaticamente haciendo ese calculco y poniendo
+    esos 0 para que solo se mueva horizontalmente, y le doy doy el 33%,66% y 100% a cada etiqueta por que sabemos que las animaciones van hasta el 100% entonces hay que hacer
+    un calculo con las imagenes que tenemos para saber cuanto va a ocupar cada imagen*/
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
